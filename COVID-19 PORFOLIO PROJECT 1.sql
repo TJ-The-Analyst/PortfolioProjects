@@ -1,3 +1,4 @@
+-- COMPLETED IN Microsoft SQL Server 2019 --
 
 SELECT * FROM PorfolioProject..[COVID DEATHS]
 WHERE continent IS NOT NULL
