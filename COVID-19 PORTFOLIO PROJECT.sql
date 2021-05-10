@@ -80,7 +80,7 @@ ORDER BY 1,2;
 
 SELECT dea.continent, dea.LOCATION, dea.DATE, dea.POPULATION, vac.new_vaccinations,
 SUM(CONVERT(INT, vac.new_vaccinations)) 
-OVER (PARTITION BY dea.LOCATION ORDER BY dea.LOCATION, dea.DATE) as rolling_people_vaccinated 
+OVER (PARTITION BY dea.LOCATION, dea.DATE) as rolling_people_vaccinated 
 FROM PorfolioProject..[COVID DEATHS] dea
 JOIN PorfolioProject..[COVID VACCINATIONS] vac
 	ON dea.LOCATION = vac.LOCATION
@@ -95,7 +95,7 @@ WITH Pop_vs_Vac (continent, LOCATION, DATE, POPULATION, new_vaccinations, rollin
 AS
 (SELECT dea.continent, dea.LOCATION, dea.DATE, dea.POPULATION, vac.new_vaccinations,
 SUM(CONVERT(INT, vac.new_vaccinations)) 
-OVER (PARTITION BY dea.LOCATION ORDER BY dea.LOCATION, dea.DATE) as rolling_people_vaccinated 
+OVER (PARTITION BY dea.LOCATION, dea.DATE) as rolling_people_vaccinated 
 FROM PorfolioProject..[COVID DEATHS] dea
 JOIN PorfolioProject..[COVID VACCINATIONS] vac
 	ON dea.LOCATION = vac.LOCATION
@@ -122,7 +122,7 @@ CREATE TABLE #percent_population_vaccinated
 INSERT INTO #percent_population_vaccinated
 SELECT dea.continent, dea.LOCATION, dea.DATE, dea.POPULATION, vac.new_vaccinations,
 SUM(CONVERT(INT, vac.new_vaccinations)) 
-OVER (PARTITION BY dea.LOCATION ORDER BY dea.LOCATION, dea.DATE) as rolling_people_vaccinated 
+OVER (PARTITION BY dea.LOCATION, dea.DATE) as rolling_people_vaccinated 
 FROM PorfolioProject..[COVID DEATHS] dea
 JOIN PorfolioProject..[COVID VACCINATIONS] vac
 	ON dea.LOCATION = vac.LOCATION
@@ -138,7 +138,7 @@ FROM #percent_population_vaccinated
 CREATE VIEW percent_population_vaccinated as
 SELECT dea.continent, dea.LOCATION, dea.DATE, dea.POPULATION, vac.new_vaccinations,
 SUM(CONVERT(INT, vac.new_vaccinations)) 
-OVER (PARTITION BY dea.LOCATION ORDER BY dea.LOCATION, dea.DATE) as rolling_people_vaccinated 
+OVER (PARTITION BY dea.LOCATION, dea.DATE) as rolling_people_vaccinated 
 FROM PorfolioProject..[COVID DEATHS] dea
 JOIN PorfolioProject..[COVID VACCINATIONS] vac
 	ON dea.LOCATION = vac.LOCATION
