@@ -1,3 +1,4 @@
+
 -- COMPLETED IN: Microsoft SQL Server 2019 --
 
 SELECT * FROM PorfolioProject..[COVID DEATHS]
@@ -5,7 +6,7 @@ WHERE continent IS NOT NULL
 ORDER BY 3,4;
 
 
--- Selecting the Data that we are going to be using:
+-- Selecting the Data that I am going to be using:
 
 SELECT LOCATION, DATE, total_cases, new_cases, total_deaths, POPULATION
 FROM PorfolioProject..[COVID DEATHS]
@@ -50,7 +51,7 @@ GROUP BY LOCATION
 ORDER BY total_death_count DESC
 
 
--- Let's break things down by Continent --
+-- Breaking the data down by Continent --
 
 SELECT continent, MAX(CAST(total_deaths as INT)) as total_death_count
 FROM PorfolioProject..[COVID DEATHS]
@@ -135,7 +136,7 @@ FROM #percent_population_vaccinated
 
 -- Creating View to store data for later visualizations --
 
-CREATE VIEW percent_population_vaccinated as
+CREATE VIEW percent_population_vaccinated2 as
 SELECT dea.continent, dea.LOCATION, dea.DATE, dea.POPULATION, vac.new_vaccinations,
 SUM(CONVERT(INT, vac.new_vaccinations)) 
 OVER (PARTITION BY dea.LOCATION, dea.DATE) as rolling_people_vaccinated 
@@ -144,3 +145,8 @@ JOIN PorfolioProject..[COVID VACCINATIONS] vac
 	ON dea.LOCATION = vac.LOCATION
 	AND dea.DATE = vac.DATE
 WHERE dea.continent IS NOT NULL
+
+
+-- END, Thank You for reviewing this Project!
+
+
